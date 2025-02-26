@@ -23,4 +23,9 @@ public class AirportService {
     }
     
     
+    public List<Airport> findByCity(String city) {
+    List<Airport> result = airportRepository.findByCityIgnoreCase(city);
+    return result;
+    }
+    
 }
