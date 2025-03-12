@@ -1,7 +1,9 @@
 package br.eti.laribas.airports.services;
 
 import br.eti.laribas.airports.DTO.AirportMinDTO;
+import br.eti.laribas.airports.DTO.AirportNearMeDTO;
 import br.eti.laribas.airports.entities.Airport;
+import br.eti.laribas.airports.projections.AirportNearMeProjection;
 import br.eti.laribas.airports.repositories.AirportRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +47,15 @@ public class AirportService {
         
     }
     
+    
+    
+    public List<AirportNearMeDTO> findNearMe(double latitude, double longitude) {
+        
+            List<AirportNearMeProjection> resultNearAirports = airportRepository.findNearMe(latitude, longitude);
+            
+            List<AirportNearMeDTO> resultDTO = resultNearAirports.stream()
+                    .map(x -> new AirportNearMeDTO(x)).toList();
+        
+        return resultDTO;
+    }
 }
